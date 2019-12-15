@@ -64,8 +64,6 @@ def calculate_finger(path):
             ci = i
 
     res_c = contours[ci]  # 得出最大的轮廓区域
-
-    hull = cv2.convexHull(res_c, True, returnPoints=True)  # 获得凸包点 x, y坐标
     cv2.drawContours(frame, [res_c], 0, (0, 255, 255), 2)  # 画出最大区域轮廓
 
     moments = cv2.moments(res_c)  # 求最大区域轮廓的各阶矩
@@ -117,12 +115,13 @@ def calculate_finger(path):
 
         if maybe:
             between_fingers_point.append(start)
+            # cv2.circle(frame, start, 5, [0, 0, 200], -1)
             list_t = []
-            for j in range(s - 3, s - half_section_size - 3, -3):
+            for j in range(s - 1, s - half_section_size * 3 - 1, -1):
                 list_t.append(res_c[j][0])
             before.append(list_t[:])
             list_t = []
-            for j in range(s + 3, (s + half_section_size + 3) % res_c.shape[0], 3):
+            for j in range(s + 1, (s + half_section_size * 3 + 1) % res_c.shape[0], 1):
                 list_t.append(res_c[j][0])
             after.append(list_t[:])
 
@@ -146,7 +145,6 @@ def calculate_finger(path):
     last = None
     finger = sorted(finger, key=lambda x: finger[0])
     for i in range(0, len(finger)):
-        print(finger[i])
         if (
             finger[i][0] >= width - half_section_size
             or finger[i][1] >= height - half_section_size
@@ -160,11 +158,12 @@ def calculate_finger(path):
         result.append(finger[i])
         last = finger[i]
         cv2.circle(frame, finger[i], 5, [190, 17, 200], -1)
+    # cv2.imshow("image" + str(len(result)), frame)
+    # cv2.waitKey(7000)
+    # cv2.destroyAllWindows()
+    # print(len(result))
+    return len(result)
 
-
-# cv2.imshow("image" + str(len(result)), frame)
-# cv2.waitKey(7000)
-# cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    calculate_finger(HOME + "/test/test/0/0.jpg")
+    calculate_finger(HOME + "/mytest/5_1.jpg")

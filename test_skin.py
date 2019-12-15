@@ -14,7 +14,7 @@ import os
 import os.path as osp
 import numpy as np
 
-img = cv2.imread(HOME + "/mytest/4_3.jpg")
+img = cv2.imread(HOME + "/mytest/5_1.jpg")
 # light compensation
 
 img = transforms.Resize(224)(Image.fromarray(img))
