@@ -2,5 +2,5 @@ import os.path
 
 HOME = (
     os.path.expanduser("~").replace("\\", "/")
-    + "/gesture_recognition/"
+    + "/Desktop/EmgineeringPractice1/GestureRecognitionApp/gesture_recognition/"
 )
