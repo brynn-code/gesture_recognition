@@ -6,7 +6,7 @@ from torch.autograd import Variable
 from torch.utils.data import DataLoader
 import torch.utils.data as data
 from torchvision import datasets, transforms
-from gesture import GestureDetection
+import sys
 from PIL import Image
 from matplotlib import pyplot as plt
 import cv2
@@ -166,4 +166,4 @@ def calculate_finger(path):
 
 
 if __name__ == "__main__":
-    calculate_finger(HOME + "/mytest/5_1.jpg")
+    return calculate_finger(sys.argv[1])
